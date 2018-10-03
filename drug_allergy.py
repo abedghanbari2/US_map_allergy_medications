@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 """
-from:abedghanbari
-to:mahdifallahi
 """
 import os
 import xlrd
