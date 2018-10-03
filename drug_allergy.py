@@ -5,7 +5,6 @@ from:abedghanbari
 to:mahdifallahi
 """
 import os
-#import urllib.request as urllib2
 import xlrd
 from bs4 import BeautifulSoup
 from IPython.display import SVG, display
@@ -21,8 +20,6 @@ os.chdir(dirname)
 
 
 drug_allergy = xlrd.open_workbook("wide_2016.xls")
-#sheet_names = drug_allergy.sheet_names()
-#print('Sheet Names', sheet_names)
 
 drug_data = drug_allergy.sheet_by_index(0)
 
@@ -58,9 +55,6 @@ for j in range(1,13):
     for rownum in range(3, drug_data.nrows):
     	
     	try:	
-    #		county_fips = int(inc_data.cell(rownum, 1).value)
-    #		state_fips = int(inc_data.cell(rownum, 0).value)
-    		# Put together FIPS and add leading zeroes
     		complete_fips = int(drug_data.cell(rownum, 0).value)
     		
     		mg_percap1 = float(drug_data.cell(rownum, j).value)
@@ -71,14 +65,11 @@ for j in range(1,13):
     
     # Color the states based on median income
     for p in paths:
-    #    print(p['id'])
         if p['id'] not in ["State_Lines", "separator"]:
             
             try:
-    #            print(type(p['id'][5:]))
                 inc_value = drug_use_mg[int(p['id'][5:])]
             except:
-    #            print(p['id'][5:])
                 continue
             try:
                 if inc_value > p5:
@@ -118,9 +109,7 @@ for j in range(1,13):
 
     
     draw = ImageDraw.Draw(img)
-    # font = ImageFont.truetype(<font-file>, <font-size>)
     font = ImageFont.truetype("MODERNE SANS.ttf", 70)
-    # draw.text((x, y),"Sample Text",(r,g,b))
     draw.text((1050, 50),months[j-1],(147,197,114),font=font)
     img = img.convert("RGB")
     img.save(filenames[j-1][:-4]+'.jpg')
